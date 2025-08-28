@@ -18,12 +18,25 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'pepps-title': ['Poppins', 'sans-serif'],
+				'pepps-body': ['Lato', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				pepps: {
+					indigo: 'hsl(var(--pepps-indigo))',
+					yellow: 'hsl(var(--pepps-yellow))',
+					blue: 'hsl(var(--pepps-blue))',
+					red: 'hsl(var(--pepps-red))',
+					cloud: 'hsl(var(--pepps-cloud))',
+					gray: 'hsl(var(--pepps-gray))',
+					mint: 'hsl(var(--pepps-mint))',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'

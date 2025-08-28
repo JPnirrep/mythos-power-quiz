@@ -2,32 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Import PEPPS fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@400;700&display=swap');
 
+/* PEPPS Design System - All colors MUST be HSL */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* PEPPS Brand Colors */
+    --pepps-indigo: 251 50% 33%; /* #3D2C7D */
+    --pepps-yellow: 45 100% 57%; /* #FFC425 */
+    --pepps-blue: 198 75% 53%; /* #28AAE1 */
+    --pepps-red: 356 78% 52%; /* #ED1C24 */
+    --pepps-cloud: 40 13% 97%; /* #F8F7F5 */
+    --pepps-gray: 209 7% 35%; /* #58595B */
+    --pepps-mint: 183 22% 69%; /* #A8DADC */
+    
+    /* Base Design System Colors */
+    --background: 40 13% 97%; /* pepps-cloud as default background */
+    --foreground: 251 50% 33%; /* pepps-indigo */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 251 50% 33%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 251 50% 33%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 251 50% 33%; /* pepps-indigo */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 100% 57%; /* pepps-yellow */
+    --secondary-foreground: 251 50% 33%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 183 22% 69%; /* pepps-mint */
+    --muted-foreground: 209 7% 35%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 198 75% 53%; /* pepps-blue */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -101,5 +111,45 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+/* PEPPS Component Styles */
+@layer components {
+  .quiz-card {
+    @apply bg-card rounded-2xl shadow-xl p-6 md:p-10 relative overflow-hidden;
+  }
+
+  .answer-option {
+    @apply cursor-pointer p-4 border-2 border-border rounded-lg text-center transition-all duration-200 hover:scale-105 hover:shadow-lg;
+  }
+
+  .answer-option.selected {
+    @apply border-secondary bg-secondary/10 scale-105 shadow-lg;
+  }
+
+  .progress-bar-pepps {
+    @apply w-full bg-border rounded-full h-2.5;
+  }
+
+  .progress-bar-inner-pepps {
+    @apply h-2.5 rounded-full bg-accent transition-all duration-300 ease-in-out;
+  }
+
+  .screen-transition {
+    @apply transition-all duration-500 ease-in-out;
+  }
+
+  .screen-hidden {
+    @apply opacity-0 scale-95 pointer-events-none absolute inset-0;
+  }
+
+  .screen-visible {
+    @apply opacity-100 scale-100;
   }
 }
