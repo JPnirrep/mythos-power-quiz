@@ -62,26 +62,26 @@ export const answerLabels: AnswerLabel[] = [
 export const interpretations: Record<string, Interpretation> = {
   coeur: {
     name: "Cœur Vibrant (Orphée)",
-    power: "La Connexion Émotionnelle",
-    description: "Vous ne communiquez pas, vous connectez. Votre super-pouvoir est de faire vibrer les cœurs en parlant depuis le vôtre. Votre empathie et votre authenticité créent un lien profond et inoubliable avec votre auditoire.",
-    declic: "Osez le 'Déclic Expression'. Partagez une courte anecdote personnelle. C'est en osant une vulnérabilité maîtrisée que votre message devient universel."
+    power: "L'Enchanteur des Cœurs",
+    description: "Votre hypersensibilité artistique est la source même de votre art oratoire. Vous transformez l'émotion brute en beauté universelle. Votre capacité à ressentir profondément vous permet de créer une connexion authentique qui transcende les barrières. Votre empathie et votre charisme naturel persuadent par la seule force de votre sincérité émotionnelle. Votre défi : éviter d'être submergé par l'intensité de vos émotions et apprendre à vous réguler après des moments intenses.",
+    declic: "Osez le 'Déclic Expression'. Partagez une courte anecdote personnelle. C'est en osant une vulnérabilité maîtrisée que votre message devient universel et que votre authenticité émotionnelle devient votre plus grande force."
   },
   phare: {
     name: "Phare de Clarté (Athéna)",
-    power: "L'Architecture des Idées",
-    description: "Vous ne voyez pas le chaos, vous voyez la structure. Votre super-pouvoir est de transformer la complexité en une clarté limpide. Votre parole est pensée, solide et bâtit la confiance par sa logique implacable.",
-    declic: "Activez le 'Déclic Préparation'. Avant de parler, dessinez votre plan sur une feuille (votre 'blueprint'). Cet ancrage visuel libérera votre esprit et calmera votre trac."
+    power: "L'Architecte de la Clarté",
+    description: "Votre pensée est structurée, claire et orientée vers la résolution de problèmes. Vous excellez dans la planification et l'élaboration de stratégies complexes. Votre super-pouvoir est de transformer la complexité en clarté limpide, guidant et conseillant sans faire le travail à la place des autres. Votre maîtrise émotionnelle vous permet de privilégier la réflexion à l'impulsivité. Votre défi : éviter la sur-intellectualisation qui pourrait vous couper de votre ressenti et créer une distance avec les autres.",
+    declic: "Activez le 'Déclic Préparation'. Avant de parler, dessinez votre plan sur une feuille (votre 'blueprint'). Cet ancrage visuel libérera votre esprit, calmera votre trac et vous permettra de partager votre sagesse structurée."
   },
   antenne: {
     name: "Antenne Subtile (Cassandre)",
-    power: "La Perception Intuitive",
-    description: "Vous captez les courants invisibles. Votre super-pouvoir est de 'lire la salle' et de percevoir les signaux faibles que 90% des gens ignorent. Votre prise de parole est un dialogue subtil, une danse d'ajustement permanent avec votre public.",
-    declic: "Entraînez votre 'Déclic Présence'. Ne scannez pas votre public, mais 'écoutez-le avec les yeux'. Choisissez un ou deux visages bienveillants et connectez-vous réellement à eux ; ils deviendront vos alliés."
+    power: "La Vigie des Signaux Faibles",
+    description: "Vous percevez la vérité cachée, les dynamiques invisibles et les non-dits que 90% des gens ignorent. Votre perception transcende la réalité matérielle et vous capte des informations inaccessibles au commun des mortels. Votre courage vous pousse à dire cette vérité malgré le risque d'être incompris. Votre défi : apprendre à faire confiance à vos perceptions même quand elles ne sont pas validées par l'extérieur, et éviter l'isolement dû à l'incompréhension.",
+    declic: "Entraînez votre 'Déclic Présence'. Ne scannez pas votre public, mais 'écoutez-le avec les yeux'. Faites confiance à vos perceptions subtiles et choisissez un ou deux visages bienveillants pour vous ancrer dans la connexion."
   },
   force: {
     name: "Force Tranquille (Hestia)",
-    power: "Le Rayonnement du Calme",
-    description: "Vous n'imposez pas, vous rayonnez. Votre super-pouvoir est de maîtriser votre état interne pour diffuser une sérénité contagieuse. Votre présence posée et vos silences habités donnent un poids immense à chacun de vos mots.",
-    declic: "Priorisez le 'Déclic Paix Intérieure'. Juste avant de commencer, ancrez-vous physiquement en sentant fermement le sol sous vos pieds. Prenez trois respirations lentes en vous concentrant sur l'expiration."
+    power: "Le Gardien du Foyer",
+    description: "Vous êtes le point d'ancrage, le centre stable qui apaise et sécurise votre entourage. Votre présence paisible et non-conflictuelle préserve l'harmonie. Vous avez la capacité remarquable de créer et maintenir un sanctuaire intérieur qui vous protège du chaos extérieur. Votre constance et votre fiabilité donnent un poids immense à chacune de vos paroles. Votre défi : éviter le retrait excessif du monde et partager vos dons apaisants sans vous effacer.",
+    declic: "Priorisez le 'Déclic Paix Intérieure'. Avant de prendre la parole, ancrez-vous physiquement en sentant le sol sous vos pieds. Votre sanctuaire intérieur devient alors une force rayonnante qui apaise votre auditoire."
   }
 };
