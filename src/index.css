@@ -112,11 +112,9 @@
   body {
     @apply text-foreground;
     font-family: 'Lato', sans-serif;
-    background-image: url('/lovable-uploads/d75dd515-1fa2-4855-ad5e-8f29f3b0e2ef.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, hsl(var(--pepps-indigo)) 0%, hsl(var(--pepps-blue)) 50%, hsl(var(--pepps-mint)) 100%);
     background-attachment: fixed;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
