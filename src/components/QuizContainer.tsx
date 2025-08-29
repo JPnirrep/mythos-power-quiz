@@ -114,7 +114,7 @@ export function QuizContainer() {
   */
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[url('/lovable-uploads/d75dd515-1fa2-4855-ad5e-8f29f3b0e2ef.png')] bg-cover bg-center bg-no-repeat md:bg-fixed">
       <header className="mb-8">
         <img 
           src="/lovable-uploads/c58dc642-4e1d-4b82-bb6f-de625e871e9c.png"
