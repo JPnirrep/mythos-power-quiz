@@ -52,11 +52,11 @@ export const quizData: QuizQuestion[] = [
 ];
 
 export const answerLabels: AnswerLabel[] = [
-  { score: 1, text: "Pas du tout moi", emoji: "😟" },
-  { score: 2, text: "Rarement moi", emoji: "🤔" },
-  { score: 3, text: "Parfois moi", emoji: "😐" },
-  { score: 4, text: "Souvent moi", emoji: "😊" },
-  { score: 5, text: "Totalement moi", emoji: "✨" }
+  { score: 1, text: "Pas du tout moi", emoji: "/lovable-uploads/emoji-sad.png" },
+  { score: 2, text: "Rarement moi", emoji: "/lovable-uploads/emoji-effort.png" },
+  { score: 3, text: "Parfois moi", emoji: "/lovable-uploads/emoji-wise.png" },
+  { score: 4, text: "Souvent moi", emoji: "/lovable-uploads/emoji-happy.png" },
+  { score: 5, text: "Totalement moi", emoji: "/lovable-uploads/emoji-angel.png" }
 ];
 
 export const interpretations: Record<string, Interpretation> = {

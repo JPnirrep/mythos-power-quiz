@@ -57,7 +57,13 @@ export function QuizScreen({
             }`}
             onClick={() => onAnswerSelect(currentQuestionIndex, label.score)}
           >
-            <div className="text-4xl mb-2">{label.emoji}</div>
+            <div className="w-16 h-16 mb-2 mx-auto">
+              <img 
+                src={label.emoji} 
+                alt={label.text}
+                className="w-full h-full object-contain"
+              />
+            </div>
             <div className="text-sm font-pepps-body">{label.text}</div>
           </div>
         ))}
