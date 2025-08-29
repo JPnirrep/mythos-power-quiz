@@ -110,8 +110,13 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-family: 'Lato', sans-serif;
+    background-image: url('/lovable-uploads/d75dd515-1fa2-4855-ad5e-8f29f3b0e2ef.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
