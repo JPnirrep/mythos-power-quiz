@@ -1,11 +1,9 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
-import { Radar } from 'react-chartjs-2';
 import { interpretations } from "@/data/quizData";
 import { resultsContent, lowestAdvice } from "@/data/resultsContent";
+import { TempleVisualization } from "@/components/visuals/TempleVisualization";
 
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+
 
 interface Scores {
   coeur: number;
@@ -24,60 +22,35 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
   const lowestKey = sortedScores[3][0] as keyof typeof lowestAdvice;
   const dominantContent = resultsContent[dominantKey];
   const lowestContent = lowestAdvice[lowestKey];
-  
-  const chartData = {
-    labels: [
-      `Cœur Vibrant (${scores.coeur}/30)`,
-      `Phare de Clarté (${scores.phare}/30)`,
-      `Antenne Subtile (${scores.antenne}/30)`,
-      `Force Tranquille (${scores.force}/30)`
-    ],
-    datasets: [{
-      label: 'Vos Super-Pouvoirs',
-      data: [scores.coeur, scores.phare, scores.antenne, scores.force],
-      backgroundColor: 'hsl(198, 75%, 53%, 0.2)', // pepps-blue with opacity
-      borderColor: 'hsl(198, 75%, 53%)', // pepps-blue
-      pointBackgroundColor: 'hsl(198, 75%, 53%)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'hsl(198, 75%, 53%)'
-    }]
+
+  // Deity mapping for temple visualization
+  const deityMap = {
+    coeur: { name: "Athéna", image: "/src/assets/athena.png", description: "Déesse de la sagesse et de la stratégie" },
+    phare: { name: "Poséidon", image: "/src/assets/poseidon.png", description: "Dieu des océans et des profondeurs" },
+    antenne: { name: "Aphrodite", image: "/src/assets/aphrodite.jpg", description: "Déesse de l'amour et de la beauté" },
+    force: { name: "Hestia", image: "/src/assets/hestia.jpg", description: "Déesse du foyer et de la tranquillité" }
   };
 
-  const chartOptions = {
-    scales: {
-      r: {
-        beginAtZero: true,
-        max: 30,
-        pointLabels: {
-          font: { size: 14 },
-          color: 'hsl(251, 50%, 33%)' // pepps-indigo
-        },
-        grid: {
-          color: 'hsl(214.3, 31.8%, 91.4%)' // border color
-        },
-        angleLines: {
-          color: 'hsl(214.3, 31.8%, 91.4%)'
-        }
-      }
-    },
-    plugins: {
-      legend: { display: false }
-    }
+  const archetypeNameMap = {
+    coeur: "Cœur Vibrant",
+    phare: "Phare de Clarté", 
+    antenne: "Antenne Subtile",
+    force: "Force Tranquille"
   };
+
+  // Prepare data for temple visualization
+  const scoresForTemple = Object.entries(scores).map(([key, score]) => ({
+    name: archetypeNameMap[key as keyof typeof archetypeNameMap],
+    score,
+    maxScore: 30,
+    deity: deityMap[key as keyof typeof deityMap]
+  }));
 
   return (
     <div className="screen-transition screen-visible text-center">
-      <h1 className="text-3xl md:text-4xl font-bold mb-4 font-pepps-title text-primary">
-        🎉 Vos Super-Pouvoirs de Sensibles ! 🎉
-      </h1>
-      <p className="text-lg mb-6 text-muted-foreground font-pepps-body">
-        Voici la carte de vos talents. Vos scores les plus élevés sont vos super-pouvoirs dominants.
-      </p>
-      
-      {/* Radar Chart */}
-      <div className="w-full max-w-md mx-auto mb-8">
-        <Radar data={chartData} options={chartOptions} />
+      {/* Temple Visualization */}
+      <div className="w-full mb-8">
+        <TempleVisualization scores={scoresForTemple} />
       </div>
 
       {/* Results Interpretation */}

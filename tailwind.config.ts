@@ -37,6 +37,13 @@ export default {
 					gray: 'hsl(var(--pepps-gray))',
 					mint: 'hsl(var(--pepps-mint))',
 				},
+				temple: {
+					gold: 'hsl(var(--temple-gold))',
+					marble: 'hsl(var(--temple-marble))',
+					stone: 'hsl(var(--temple-stone))',
+					accent: 'hsl(var(--temple-accent))',
+					shadow: 'hsl(var(--temple-shadow))',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'

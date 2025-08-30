@@ -17,6 +17,13 @@
     --pepps-gray: 209 7% 35%; /* #58595B */
     --pepps-mint: 183 22% 69%; /* #A8DADC */
     
+    /* Temple colors */
+    --temple-gold: 43 74% 49%;
+    --temple-marble: 240 9% 98%;
+    --temple-stone: 0 0% 41%;
+    --temple-accent: 207 44% 49%;
+    --temple-shadow: 0 0% 0%;
+    
     /* Base Design System Colors */
     --background: 40 13% 97%; /* pepps-cloud as default background */
     --foreground: 251 50% 33%; /* pepps-indigo */
