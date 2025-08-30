@@ -25,17 +25,17 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
 
   // Deity mapping for temple visualization (using placeholder images)
   const deityMap = {
-    coeur: { name: "Athéna", image: "/placeholder.svg", description: "Déesse de la sagesse et de la stratégie" },
-    phare: { name: "Poséidon", image: "/placeholder.svg", description: "Dieu des océans et des profondeurs" },
-    antenne: { name: "Aphrodite", image: "/placeholder.svg", description: "Déesse de l'amour et de la beauté" },
+    coeur: { name: "Orphée", image: "/placeholder.svg", description: "Dieu de la musique et de l'enchantement" },
+    phare: { name: "Athéna", image: "/placeholder.svg", description: "Déesse de la sagesse et de la stratégie" },
+    antenne: { name: "Cassandre", image: "/placeholder.svg", description: "Prophétesse de la vérité et de l'intuition" },
     force: { name: "Hestia", image: "/placeholder.svg", description: "Déesse du foyer et de la tranquillité" }
   };
 
   const archetypeNameMap = {
-    coeur: "Cœur Vibrant",
-    phare: "Phare de Clarté", 
-    antenne: "Antenne Subtile",
-    force: "Force Tranquille"
+    coeur: "L'ENCHANTEUR (Orphée)",
+    phare: "L'ARCHITECTE (Athéna)", 
+    antenne: "LA VIGIE (Cassandre)",
+    force: "LE GARDIEN (Hestia)"
   };
 
   // Prepare data for temple visualization
