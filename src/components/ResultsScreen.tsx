@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import { interpretations } from "@/data/quizData";
+import { resultsContent, lowestAdvice } from "@/data/resultsContent";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -19,6 +20,10 @@ interface ResultsScreenProps {
 
 export function ResultsScreen({ scores }: ResultsScreenProps) {
   const sortedScores = Object.entries(scores).sort(([, a], [, b]) => b - a);
+  const dominantKey = sortedScores[0][0] as keyof typeof resultsContent;
+  const lowestKey = sortedScores[3][0] as keyof typeof lowestAdvice;
+  const dominantContent = resultsContent[dominantKey];
+  const lowestContent = lowestAdvice[lowestKey];
   
   const chartData = {
     labels: [
@@ -77,27 +82,55 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
 
       {/* Results Interpretation */}
       <div className="text-left space-y-6">
-        {/* Dominant Power */}
-        <div className="p-4 rounded-lg border-2 border-secondary bg-secondary/10">
-          <h3 className="font-bold text-xl text-primary font-pepps-title">
-            Votre Pouvoir Dominant : {interpretations[sortedScores[0][0]].name}
+        {/* Dominant Archetype */}
+        <div className="p-6 rounded-lg border-2 border-secondary bg-secondary/10">
+          <h3 className="font-bold text-2xl text-primary font-pepps-title mb-4">
+            {dominantContent.titleMain}
           </h3>
-          <p className="font-pepps-body text-foreground">
-            <strong>{interpretations[sortedScores[0][0]].power}:</strong> {interpretations[sortedScores[0][0]].description}
+          <p className="font-pepps-body text-foreground mb-6 text-lg leading-relaxed">
+            {dominantContent.intro}
           </p>
-          <p className="mt-2 font-pepps-body text-foreground">
-            <strong>Votre Déclic PEPPS :</strong> {interpretations[sortedScores[0][0]].declic}
-          </p>
+          
+          {dominantContent.sections.map((section, index) => (
+            <div key={index} className="mb-6">
+              <h4 className="font-bold text-lg text-primary font-pepps-title mb-3">
+                {section.title}
+              </h4>
+              {section.paragraphs && section.paragraphs.map((paragraph, pIndex) => (
+                <p key={pIndex} className="font-pepps-body text-foreground mb-3 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+              {section.bullets && (
+                <ul className="space-y-2 ml-4">
+                  {section.bullets.map((bullet, bIndex) => (
+                    <li key={bIndex} className="font-pepps-body text-foreground leading-relaxed list-disc">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+          
+          {/* Déclic PEPPS - Keep original text */}
+          <div className="mt-6">
+            <h4 className="font-bold text-lg text-primary font-pepps-title mb-3">
+              Ton Levier de Croissance (Le « Déclic PEPPS »)
+            </h4>
+            <p className="font-pepps-body text-foreground leading-relaxed">
+              <strong>Votre Déclic PEPPS :</strong> {interpretations[sortedScores[0][0]].declic}
+            </p>
+          </div>
         </div>
 
         {/* Growth Area */}
         <div className="p-4 rounded-lg border border-border bg-muted/30">
-          <h3 className="font-bold text-xl text-primary font-pepps-title">
-            Votre Déclic de Croissance : {interpretations[sortedScores[3][0]].name}
+          <h3 className="font-bold text-xl text-primary font-pepps-title mb-3">
+            Ton archétype à explorer : {resultsContent[lowestKey].shortLabel}
           </h3>
-          <p className="font-pepps-body text-foreground">
-            Votre score le plus faible n'est pas une faiblesse, c'est votre plus belle opportunité d'évolution ! 
-            C'est le domaine où un petit "déclic" pourrait décupler l'impact de vos pouvoirs dominants.
+          <p className="font-pepps-body text-foreground leading-relaxed">
+            {lowestContent}
           </p>
         </div>
       </div>
