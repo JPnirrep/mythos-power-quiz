@@ -2,10 +2,6 @@ import { Button } from "@/components/ui/button";
 import { interpretations } from "@/data/quizData";
 import { resultsContent, lowestAdvice } from "@/data/resultsContent";
 import { TempleVisualization } from "@/components/visuals/TempleVisualization";
-import athenaImg from "@/assets/athena.png";
-import poseidonImg from "@/assets/poseidon.png";
-import aphroditeImg from "@/assets/aphrodite.jpg";
-import hestiaImg from "@/assets/hestia.jpg";
 
 
 
@@ -27,12 +23,12 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
   const dominantContent = resultsContent[dominantKey];
   const lowestContent = lowestAdvice[lowestKey];
 
-  // Deity mapping for temple visualization
+  // Deity mapping for temple visualization (using placeholder images)
   const deityMap = {
-    coeur: { name: "Athéna", image: athenaImg, description: "Déesse de la sagesse et de la stratégie" },
-    phare: { name: "Poséidon", image: poseidonImg, description: "Dieu des océans et des profondeurs" },
-    antenne: { name: "Aphrodite", image: aphroditeImg, description: "Déesse de l'amour et de la beauté" },
-    force: { name: "Hestia", image: hestiaImg, description: "Déesse du foyer et de la tranquillité" }
+    coeur: { name: "Athéna", image: "/placeholder.svg", description: "Déesse de la sagesse et de la stratégie" },
+    phare: { name: "Poséidon", image: "/placeholder.svg", description: "Dieu des océans et des profondeurs" },
+    antenne: { name: "Aphrodite", image: "/placeholder.svg", description: "Déesse de l'amour et de la beauté" },
+    force: { name: "Hestia", image: "/placeholder.svg", description: "Déesse du foyer et de la tranquillité" }
   };
 
   const archetypeNameMap = {
