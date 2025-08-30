@@ -10,6 +10,7 @@ interface UserInfo {
   lastname: string;
   email: string;
   phone: string;
+  consent: boolean;
 }
 
 interface Scores {
@@ -96,6 +97,7 @@ export function QuizContainer() {
     formData.append('lastname', userInfo?.lastname || '');
     formData.append('email', userInfo?.email || '');
     formData.append('phone', userInfo?.phone || '');
+    formData.append('consent_communications', userInfo?.consent ? 'true' : 'false');
     
     // Add answers and scores
     userAnswers.forEach((answer, i) => {

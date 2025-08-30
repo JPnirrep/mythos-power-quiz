@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface UserInfo {
   firstname: string;
   lastname: string;
   email: string;
   phone: string;
+  consent: boolean;
 }
 
 interface StartScreenProps {
@@ -19,6 +22,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
     lastname: "",
     email: "",
     phone: "",
+    consent: false,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,7 +37,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
   return (
     <div className="screen-transition screen-visible">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-primary">
-        Le Grand Quiz Miroire des Mythes
+        Le Grand Quiz Miroir des Mythes
       </h1>
       <p className="text-center text-lg mb-2 text-accent font-medium">
         Découvrez vos Super-Pouvoirs de Sensibles
@@ -77,6 +81,18 @@ export function StartScreen({ onStart }: StartScreenProps) {
           required
           className="focus:ring-secondary focus:border-secondary"
         />
+        <div className="flex items-center space-x-2 mb-4">
+          <Checkbox 
+            id="consent" 
+            checked={userInfo.consent}
+            onCheckedChange={(checked) => 
+              setUserInfo(prev => ({ ...prev, consent: checked === true }))
+            }
+          />
+          <Label htmlFor="consent" className="text-sm text-muted-foreground">
+            J'accepte de recevoir des communications de La Fabrique Pepps
+          </Label>
+        </div>
         <Button 
           type="submit" 
           variant="pepps" 
