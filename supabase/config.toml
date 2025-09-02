@@ -1,1 +1,4 @@
 project_id = "jrmmqjmmbelwpojntlmz"
+
+[functions.data-deletion]
+verify_jwt = false
