@@ -40,7 +40,12 @@ export function StartScreen({ onStart }: StartScreenProps) {
   };
 
   const handleSocialAuth = async (provider: 'google' | 'facebook') => {
+    console.log('🔵 Début de handleSocialAuth avec provider:', provider);
+    
     try {
+      console.log('🔵 Tentative de connexion OAuth...');
+      console.log('🔵 URL de redirection:', `${window.location.origin}/`);
+      
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -52,14 +57,20 @@ export function StartScreen({ onStart }: StartScreenProps) {
         },
       });
       
+      console.log('🔵 Réponse OAuth:', { error });
+      
       if (error) {
+        console.error('🔴 Erreur OAuth:', error);
         toast({
           title: "Erreur de connexion",
           description: error.message,
           variant: "destructive",
         });
+      } else {
+        console.log('🟢 OAuth initié avec succès');
       }
     } catch (error) {
+      console.error('🔴 Erreur catch:', error);
       toast({
         title: "Erreur de connexion",
         description: "Une erreur inattendue s'est produite",
@@ -155,7 +166,10 @@ export function StartScreen({ onStart }: StartScreenProps) {
             variant="outline"
             size="lg"
             className="w-full"
-            onClick={() => handleSocialAuth('google')}
+            onClick={() => {
+              console.log('🔵 Clic sur le bouton Google détecté!');
+              handleSocialAuth('google');
+            }}
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path
