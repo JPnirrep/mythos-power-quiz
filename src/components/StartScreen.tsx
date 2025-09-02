@@ -45,8 +45,9 @@ export function StartScreen({ onStart }: StartScreenProps) {
     try {
       console.log('🔵 Tentative de connexion OAuth...');
       console.log('🔵 URL de redirection:', `${window.location.origin}/`);
+      console.log('🔵 Client Supabase disponible:', !!supabase);
       
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
           redirectTo: `${window.location.origin}/`,
@@ -57,23 +58,27 @@ export function StartScreen({ onStart }: StartScreenProps) {
         },
       });
       
-      console.log('🔵 Réponse OAuth:', { error });
+      console.log('🔵 Réponse OAuth complète:', { data, error });
       
       if (error) {
         console.error('🔴 Erreur OAuth:', error);
         toast({
           title: "Erreur de connexion",
-          description: error.message,
+          description: `Erreur: ${error.message}`,
           variant: "destructive",
         });
       } else {
-        console.log('🟢 OAuth initié avec succès');
+        console.log('🟢 OAuth initié avec succès, redirection en cours...');
+        toast({
+          title: "Redirection en cours",
+          description: "Vous allez être redirigé vers Google...",
+        });
       }
     } catch (error) {
-      console.error('🔴 Erreur catch:', error);
+      console.error('🔴 Erreur catch complète:', error);
       toast({
         title: "Erreur de connexion",
-        description: "Une erreur inattendue s'est produite",
+        description: `Erreur technique: ${error}`,
         variant: "destructive",
       });
     }
