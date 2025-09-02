@@ -55,6 +55,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
             access_type: 'offline',
             prompt: 'consent',
           },
+          skipBrowserRedirect: true, // Récupère l'URL au lieu de rediriger
         },
       });
       
@@ -71,8 +72,14 @@ export function StartScreen({ onStart }: StartScreenProps) {
         console.log('🟢 OAuth initié avec succès, redirection en cours...');
         toast({
           title: "Redirection en cours",
-          description: "Vous allez être redirigé vers Google...",
+          description: "Une nouvelle fenêtre va s'ouvrir pour Google...",
         });
+        
+        // Si nous avons une URL, l'ouvrir dans une nouvelle fenêtre
+        if (data?.url) {
+          console.log('🔵 Ouverture de:', data.url);
+          window.open(data.url, '_blank', 'width=500,height=600,scrollbars=yes');
+        }
       }
     } catch (error) {
       console.error('🔴 Erreur catch complète:', error);
