@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { StartScreen } from "./StartScreen";
 import { QuizScreen } from "./QuizScreen";
 import { PauseScreen } from "./PauseScreen";
@@ -155,6 +156,24 @@ export function QuizContainer() {
           <ResultsScreen scores={scores} />
         )}
       </main>
+      
+      <footer className="mt-8 text-center text-sm text-muted-foreground">
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link 
+            to="/privacy-policy" 
+            className="hover:text-foreground transition-colors underline"
+          >
+            Politique de confidentialité
+          </Link>
+          <span>•</span>
+          <Link 
+            to="/terms-of-service" 
+            className="hover:text-foreground transition-colors underline"
+          >
+            Conditions d'utilisation
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
