@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { StartScreen } from "./StartScreen";
 import { QuizScreen } from "./QuizScreen";
 import { PauseScreen } from "./PauseScreen";
 import { ResultsScreen } from "./ResultsScreen";
 import { quizData } from "@/data/quizData";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserInfo {
   firstname: string;
@@ -31,6 +33,51 @@ export function QuizContainer() {
   );
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [scores, setScores] = useState<Scores>({ coeur: 0, phare: 0, antenne: 0, force: 0 });
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  
+  const { toast } = useToast();
+
+  // Gestion de l'authentification Google
+  useEffect(() => {
+    // Vérifier la session existante
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        handleGoogleAuthSuccess(session.user);
+      }
+      setIsCheckingAuth(false);
+    });
+
+    // Écouter les changements d'authentification
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        setTimeout(() => {
+          handleGoogleAuthSuccess(session.user);
+        }, 0);
+      }
+      setIsCheckingAuth(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleGoogleAuthSuccess = (user: any) => {
+    // Extraire les informations utilisateur depuis Google
+    const userInfo: UserInfo = {
+      firstname: user.user_metadata?.given_name || user.user_metadata?.name?.split(' ')[0] || '',
+      lastname: user.user_metadata?.family_name || user.user_metadata?.name?.split(' ').slice(1).join(' ') || '',
+      email: user.email || '',
+      phone: user.user_metadata?.phone || '',
+      consent: true, // Par défaut pour les utilisateurs Google
+    };
+
+    setUserInfo(userInfo);
+    setCurrentScreen('quiz');
+    
+    toast({
+      title: "Connexion réussie",
+      description: `Bienvenue ${userInfo.firstname}!`,
+    });
+  };
 
   const handleStart = (info: UserInfo) => {
     setUserInfo(info);
@@ -131,9 +178,13 @@ export function QuizContainer() {
       </header>
 
       <main className="w-full max-w-3xl quiz-card">
-        {currentScreen === 'start' && (
+        {isCheckingAuth ? (
+          <div className="text-center py-8">
+            <p className="text-lg">Vérification de l'authentification...</p>
+          </div>
+        ) : currentScreen === 'start' ? (
           <StartScreen onStart={handleStart} />
-        )}
+        ) : null}
 
         {currentScreen === 'quiz' && (
           <QuizScreen
