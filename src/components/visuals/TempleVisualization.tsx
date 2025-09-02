@@ -21,15 +21,24 @@ interface TempleVisualizationProps {
 export function TempleVisualization({ scores }: TempleVisualizationProps) {
   // Sort scores to identify dominant and secondary
   const sortedScores = [...scores].sort((a, b) => b.score - a.score);
-  const dominantScore = sortedScores[0];
+  const topScore = sortedScores[0].score;
   const secondScore = sortedScores[1];
   
-  // Check if second score is within 2 points of dominant
-  const isSecondaryClose = (dominantScore.score - secondScore.score) <= 2;
+  // Find all scores that are equal to the top score (dominants)
+  const dominantScores = sortedScores.filter(score => score.score === topScore);
+  const isDominantTie = dominantScores.length > 1;
+  
+  // Check if second highest score is within 2 points of dominant (but not equal)
+  const isSecondaryClose = !isDominantTie && (topScore - secondScore.score) <= 2 && (topScore - secondScore.score) > 0;
+  
+  console.log('Temple - Scores dominants:', dominantScores.map(s => s.name));
+  console.log('Temple - Égalité détectée:', isDominantTie);
   
   // Calculate opacity for each column
   const getColumnProps = (score: PersonalityScore) => {
-    if (score.name === dominantScore.name) {
+    const isDominant = dominantScores.some(dominant => dominant.name === score.name);
+    
+    if (isDominant) {
       return { 
         opacity: 1, 
         isDominant: true, 

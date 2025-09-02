@@ -88,28 +88,6 @@ export function QuizContainer() {
 
     console.log('Scores finaux:', newScores);
     setScores(newScores);
-    
-    // Test rapide des autres patterns pour validation
-    testOtherPatterns();
-  };
-
-  // Fonction de test pour valider le système
-  const testOtherPatterns = () => {
-    console.log('\n=== TESTS DE VALIDATION ===');
-    
-    // Test 1: Toutes réponses à 1 (minimum)
-    const minScores = { coeur: 6, phare: 6, antenne: 6, force: 6 };
-    console.log('Test MIN (tout à 1):', minScores, '→ Dominant:', Object.entries(minScores).sort(([,a], [,b]) => b-a)[0][0]);
-    
-    // Test 2: Focus PHARE (5,5,5,5,5,1 puis 1 pour autres)
-    const phareScores = { coeur: 6, phare: 30, antenne: 6, force: 6 };
-    console.log('Test PHARE focus:', phareScores, '→ Dominant:', Object.entries(phareScores).sort(([,a], [,b]) => b-a)[0][0]);
-    
-    // Test 3: Focus FORCE
-    const forceScores = { coeur: 6, phare: 6, antenne: 6, force: 30 };
-    console.log('Test FORCE focus:', forceScores, '→ Dominant:', Object.entries(forceScores).sort(([,a], [,b]) => b-a)[0][0]);
-    
-    console.log('=== FIN DES TESTS ===\n');
   };
 
   /*
