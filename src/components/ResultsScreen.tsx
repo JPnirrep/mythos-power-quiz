@@ -17,7 +17,30 @@ interface ResultsScreenProps {
 }
 
 export function ResultsScreen({ scores }: ResultsScreenProps) {
-  const sortedScores = Object.entries(scores).sort(([, a], [, b]) => b - a);
+  // Logique de tri améliorée avec gestion des égalités
+  const sortedScores = Object.entries(scores)
+    .sort(([keyA, scoreA], [keyB, scoreB]) => {
+      // Tri principal par score décroissant
+      if (scoreB !== scoreA) {
+        return scoreB - scoreA;
+      }
+      
+      // En cas d'égalité parfaite, utiliser un ordre fixe mais logique
+      // Basé sur l'ordre des "forces" dans la mythologie
+      const orderPriority = { 'phare': 4, 'coeur': 3, 'antenne': 2, 'force': 1 };
+      return orderPriority[keyB as keyof typeof orderPriority] - orderPriority[keyA as keyof typeof orderPriority];
+    });
+    
+  console.log('Scores originaux:', scores);
+  console.log('Scores triés:', sortedScores);
+  
+  // Détection d'égalité pour information
+  const topScores = sortedScores.slice(0, 2);
+  const hasEquality = topScores[0][1] === topScores[1][1];
+  if (hasEquality) {
+    console.log('🔍 ÉGALITÉ DÉTECTÉE entre:', topScores[0][0], 'et', topScores[1][0]);
+  }
+  
   const dominantKey = sortedScores[0][0] as keyof typeof resultsContent;
   const lowestKey = sortedScores[3][0] as keyof typeof lowestAdvice;
   const dominantContent = resultsContent[dominantKey];
