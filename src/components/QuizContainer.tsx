@@ -33,6 +33,7 @@ export function QuizContainer() {
     new Array(quizData.length).fill(null)
   );
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [scores, setScores] = useState<Scores>({ coeur: 0, phare: 0, antenne: 0, force: 0 });
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   
@@ -62,6 +63,9 @@ export function QuizContainer() {
   }, []);
 
   const handleGoogleAuthSuccess = (user: any) => {
+    // Set the authenticated user
+    setUser(user);
+    
     // Extraire les informations utilisateur depuis Google
     const userInfo: UserInfo = {
       firstname: user.user_metadata?.given_name || user.user_metadata?.name?.split(' ')[0] || '',
@@ -205,8 +209,8 @@ export function QuizContainer() {
         )}
       </main>
       
-      <footer className="mt-8 text-center text-sm text-muted-foreground">
-        <div className="flex flex-wrap justify-center gap-4">
+      <footer className="text-center text-sm text-muted-foreground flex flex-col items-center gap-2">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Link 
             to="/privacy-policy" 
             className="hover:text-foreground transition-colors underline"
@@ -220,7 +224,19 @@ export function QuizContainer() {
           >
             Conditions d'utilisation
           </Link>
+          <span>•</span>
+          <Link 
+            to="/data-deletion" 
+            className="hover:text-foreground transition-colors underline"
+          >
+            Suppression des données
+          </Link>
         </div>
+        {user && (
+          <div className="mt-2">
+            <DeleteMyDataButton />
+          </div>
+        )}
       </footer>
     </div>
   );
