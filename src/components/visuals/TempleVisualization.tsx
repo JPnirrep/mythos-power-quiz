@@ -27,12 +27,8 @@ export function TempleVisualization({ scores }: TempleVisualizationProps) {
   // Find all scores that are equal to the top score (dominants)
   const dominantScores = sortedScores.filter(score => score.score === topScore);
   const isDominantTie = dominantScores.length > 1;
-  
   // Check if second highest score is within 2 points of dominant (but not equal)
   const isSecondaryClose = !isDominantTie && (topScore - secondScore.score) <= 2 && (topScore - secondScore.score) > 0;
-  
-  console.log('Temple - Scores dominants:', dominantScores.map(s => s.name));
-  console.log('Temple - Égalité détectée:', isDominantTie);
   
   // Calculate opacity for each column
   const getColumnProps = (score: PersonalityScore) => {

@@ -40,13 +40,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
   };
 
   const handleSocialAuth = async (provider: 'google' | 'facebook') => {
-    console.log('🔵 Début de handleSocialAuth avec provider:', provider);
-    
     try {
-      console.log('🔵 Tentative de connexion OAuth...');
-      console.log('🔵 URL de redirection:', `${window.location.origin}/`);
-      console.log('🔵 Client Supabase disponible:', !!supabase);
-      
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -55,29 +49,23 @@ export function StartScreen({ onStart }: StartScreenProps) {
             access_type: 'offline',
             prompt: 'consent',
           },
-          skipBrowserRedirect: true, // Récupère l'URL au lieu de rediriger
+          skipBrowserRedirect: true,
         },
       });
       
-      console.log('🔵 Réponse OAuth complète:', { data, error });
-      
       if (error) {
-        console.error('🔴 Erreur OAuth:', error);
         toast({
           title: "Erreur de connexion",
           description: `Erreur: ${error.message}`,
           variant: "destructive",
         });
       } else {
-        console.log('🟢 OAuth initié avec succès, redirection en cours...');
         toast({
           title: "Redirection en cours",
-          description: "Une nouvelle fenêtre va s'ouvrir pour Google...",
+          description: "Une nouvelle fenêtre va s'ouvrir...",
         });
         
-        // Si nous avons une URL, l'ouvrir dans une nouvelle fenêtre
         if (data?.url) {
-          console.log('🔵 Ouverture de:', data.url);
           window.open(data.url, '_blank', 'width=500,height=600,scrollbars=yes');
         }
       }
@@ -178,10 +166,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
             variant="outline"
             size="lg"
             className="w-full"
-            onClick={() => {
-              console.log('🔵 Clic sur le bouton Google détecté!');
-              handleSocialAuth('google');
-            }}
+            onClick={() => handleSocialAuth('google')}
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
               <path

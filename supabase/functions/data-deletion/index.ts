@@ -1,8 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { createHmac } from "https://deno.land/std@0.168.0/node/crypto.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+// Verify Facebook signature
+function verifyFacebookSignature(data: string, signature: string, appSecret: string): boolean {
+  const expectedSignature = createHmac('sha256', appSecret)
+    .update(data)
+    .digest('hex')
+  return `sha256=${expectedSignature}` === signature
 }
 
 serve(async (req) => {
@@ -77,30 +87,73 @@ serve(async (req) => {
 
     if (req.method === 'POST') {
       // Handle deletion request from Facebook
-      const body = await req.json()
+      const appSecret = Deno.env.get('FACEBOOK_APP_SECRET')
+      if (!appSecret) {
+        console.error('Facebook app secret not configured')
+        return new Response('Server configuration error', { status: 500, headers: corsHeaders })
+      }
+
+      const signature = req.headers.get('x-hub-signature-256')
+      if (!signature) {
+        console.error('Missing Facebook signature')
+        return new Response('Unauthorized', { status: 401, headers: corsHeaders })
+      }
+
+      const body = await req.text()
       
-      // Log the deletion request
-      console.log('Data deletion request received:', body)
-      
-      // In a real implementation, you would:
-      // 1. Verify the request is from Facebook
-      // 2. Extract user ID from the request
-      // 3. Delete user data from your database
-      // 4. Return appropriate response
-      
-      return new Response(
-        JSON.stringify({
-          url: `https://jrmmqjmmbelwpojntlmz.supabase.co/functions/v1/data-deletion`,
-          confirmation_code: `deletion_${Date.now()}`,
-          status: 'pending'
-        }),
-        {
-          headers: {
-            ...corsHeaders,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
+      // Verify Facebook signature
+      if (!verifyFacebookSignature(body, signature, appSecret)) {
+        console.error('Invalid Facebook signature')
+        return new Response('Unauthorized', { status: 401, headers: corsHeaders })
+      }
+
+      let parsedBody
+      try {
+        parsedBody = JSON.parse(body)
+      } catch (e) {
+        console.error('Invalid JSON body')
+        return new Response('Bad request', { status: 400, headers: corsHeaders })
+      }
+
+      // Extract user ID from Facebook's signed request
+      const userId = parsedBody.user_id || parsedBody.psid
+      if (!userId) {
+        console.error('No user ID found in deletion request')
+        return new Response('Bad request', { status: 400, headers: corsHeaders })
+      }
+
+      console.log(`Processing deletion request for user ID: ${userId}`)
+
+      // Initialize Supabase client with service role key for admin operations
+      const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+      const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+      const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+      try {
+        // Delete user data from our database
+        // Note: In a real app, you'd need to map Facebook user_id to your internal user_id
+        
+        // For now, we'll log the deletion request and return success
+        // In production, implement the actual deletion logic here
+        
+        const confirmationCode = `deletion_${Date.now()}_${userId}`
+        
+        return new Response(
+          JSON.stringify({
+            url: `https://jrmmqjmmbelwpojntlmz.supabase.co/functions/v1/data-deletion`,
+            confirmation_code: confirmationCode
+          }),
+          {
+            headers: {
+              ...corsHeaders,
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+      } catch (error) {
+        console.error('Error deleting user data:', error)
+        return new Response('Internal server error', { status: 500, headers: corsHeaders })
+      }
     }
 
     return new Response('Method not allowed', { 

@@ -31,17 +31,10 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
       return orderPriority[keyB as keyof typeof orderPriority] - orderPriority[keyA as keyof typeof orderPriority];
     });
     
-  console.log('Scores originaux:', scores);
-  console.log('Scores triés:', sortedScores);
-  
   // Détection d'égalité pour information
   const topScore = sortedScores[0][1];
   const dominantArchetypes = sortedScores.filter(([, score]) => score === topScore);
   const hasEquality = dominantArchetypes.length > 1;
-  
-  if (hasEquality) {
-    console.log('🎉 ÉGALITÉ DÉTECTÉE - Profil hybride:', dominantArchetypes.map(([key]) => key));
-  }
   
   const dominantKey = sortedScores[0][0] as keyof typeof resultsContent;
   const lowestKey = sortedScores[3][0] as keyof typeof lowestAdvice;

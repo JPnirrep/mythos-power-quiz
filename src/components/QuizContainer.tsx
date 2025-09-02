@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { StartScreen } from "./StartScreen";
 import { QuizScreen } from "./QuizScreen";
+import { DeleteMyDataButton } from "@/components/DeleteMyDataButton";
 import { PauseScreen } from "./PauseScreen";
 import { ResultsScreen } from "./ResultsScreen";
 import { quizData } from "@/data/quizData";
@@ -120,9 +121,8 @@ export function QuizContainer() {
   const calculateResults = () => {
     const newScores = { coeur: 0, phare: 0, antenne: 0, force: 0 };
 
-    console.log('=== CALCUL DES RÉSULTATS ===');
-    console.log('Réponses utilisateur:', userAnswers);
-
+    // ... keep existing code (calculation logic)
+    
     quizData.forEach((question, index) => {
       let score = userAnswers[index] || 0;
       const originalScore = score;
@@ -130,11 +130,8 @@ export function QuizContainer() {
         score = 6 - score;
       }
       newScores[question.category] += score;
-      
-      console.log(`Q${index + 1} (${question.category}): ${originalScore} ${question.inverted ? `-> inversé: ${score}` : ''} = ${score}`);
     });
 
-    console.log('Scores finaux:', newScores);
     setScores(newScores);
   };
 
