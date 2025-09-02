@@ -72,14 +72,21 @@ export function QuizContainer() {
   const calculateResults = () => {
     const newScores = { coeur: 0, phare: 0, antenne: 0, force: 0 };
 
+    console.log('=== CALCUL DES RÉSULTATS ===');
+    console.log('Réponses utilisateur:', userAnswers);
+
     quizData.forEach((question, index) => {
       let score = userAnswers[index] || 0;
+      const originalScore = score;
       if (question.inverted) {
         score = 6 - score;
       }
       newScores[question.category] += score;
+      
+      console.log(`Q${index + 1} (${question.category}): ${originalScore} ${question.inverted ? `-> inversé: ${score}` : ''} = ${score}`);
     });
 
+    console.log('Scores finaux:', newScores);
     setScores(newScores);
     
     // Send data to Google Sheets (commented out - replace with actual URL)

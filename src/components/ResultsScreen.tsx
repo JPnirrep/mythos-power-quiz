@@ -23,12 +23,12 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
   const dominantContent = resultsContent[dominantKey];
   const lowestContent = lowestAdvice[lowestKey];
 
-  // Deity mapping for temple visualization (using placeholder images)
+  // Deity mapping for temple visualization
   const deityMap = {
-    coeur: { name: "Orphée", image: "/placeholder.svg", description: "Dieu de la musique et de l'enchantement" },
-    phare: { name: "Athéna", image: "/placeholder.svg", description: "Déesse de la sagesse et de la stratégie" },
-    antenne: { name: "Cassandre", image: "/placeholder.svg", description: "Prophétesse de la vérité et de l'intuition" },
-    force: { name: "Hestia", image: "/placeholder.svg", description: "Déesse du foyer et de la tranquillité" }
+    coeur: { name: "Orphée", image: "/lovable-uploads/7f6db2df-2b62-4afa-a91d-a2a4335760e1.png", description: "Dieu de la musique et de l'enchantement" },
+    phare: { name: "Athéna", image: "/lovable-uploads/7678f9d2-1fce-452d-a8a3-43d0ed272960.png", description: "Déesse de la sagesse et de la stratégie" },
+    antenne: { name: "Cassandre", image: "/lovable-uploads/ae64f01e-7a72-45ef-9592-f1fec8e5b883.png", description: "Prophétesse de la vérité et de l'intuition" },
+    force: { name: "Hestia", image: "/lovable-uploads/e2b37deb-d4d6-4d7d-97c3-b168817b9444.png", description: "Déesse du foyer et de la tranquillité" }
   };
 
   const archetypeNameMap = {
