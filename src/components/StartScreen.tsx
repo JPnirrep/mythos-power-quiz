@@ -81,18 +81,18 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
   return (
     <div className="screen-transition screen-visible min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-md w-full">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
+      <div className="max-w-lg w-full">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
           Le Grand Quiz Miroir des Mythes
         </h1>
-        <p className="text-center text-lg mb-2 text-foreground font-medium">
+        <p className="text-center text-xl mb-2 text-foreground font-medium">
           Découvrez vos Super-Pouvoirs de Sensibles
         </p>
-        <p className="text-center mb-8 text-muted-foreground">
+        <p className="text-center mb-8 text-muted-foreground text-lg">
           Bienvenue ! Avant de commencer cette expérience ludique, merci de nous laisser vos coordonnées pour recevoir votre rapport personnalisé.
         </p>
       
-      <form onSubmit={handleSubmit} className="space-y-4 bg-card/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-10">
+      <form onSubmit={handleSubmit} className="space-y-4 bg-card/95 backdrop-blur-sm rounded-2xl shadow-xl p-7 md:p-11">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
             type="text"
