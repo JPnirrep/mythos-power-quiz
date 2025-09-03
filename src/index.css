@@ -119,12 +119,29 @@
   body {
     @apply text-foreground;
     font-family: 'Lato', sans-serif;
-    background-image: url('/lovable-uploads/e7c724a7-188b-4abb-a4e0-47445469a0a9.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, #28AAE1, #4BC9F0, #28AAE1, #1A8BC7, #28AAE1, #5BD3F7);
+    background-size: 400% 400%;
     background-attachment: fixed;
+    animation: blueWaveMove 12s ease-in-out infinite;
     min-height: 100vh;
+  }
+
+  @keyframes blueWaveMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 100% 50%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    75% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
