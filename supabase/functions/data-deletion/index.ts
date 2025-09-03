@@ -1,18 +1,9 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { createHmac } from "https://deno.land/std@0.168.0/node/crypto.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
-
-// Verify Facebook signature
-function verifyFacebookSignature(data: string, signature: string, appSecret: string): boolean {
-  const expectedSignature = createHmac('sha256', appSecret)
-    .update(data)
-    .digest('hex')
-  return `sha256=${expectedSignature}` === signature
 }
 
 serve(async (req) => {
@@ -86,40 +77,13 @@ serve(async (req) => {
     }
 
     if (req.method === 'POST') {
-      // Handle deletion request from Facebook
-      const appSecret = Deno.env.get('FACEBOOK_APP_SECRET')
-      if (!appSecret) {
-        console.error('Facebook app secret not configured')
-        return new Response('Server configuration error', { status: 500, headers: corsHeaders })
-      }
-
-      const signature = req.headers.get('x-hub-signature-256')
-      if (!signature) {
-        console.error('Missing Facebook signature')
-        return new Response('Unauthorized', { status: 401, headers: corsHeaders })
-      }
-
-      const body = await req.text()
+      // Handle user data deletion request
+      const body = await req.json()
+      const userId = body.user_id
       
-      // Verify Facebook signature
-      if (!verifyFacebookSignature(body, signature, appSecret)) {
-        console.error('Invalid Facebook signature')
-        return new Response('Unauthorized', { status: 401, headers: corsHeaders })
-      }
-
-      let parsedBody
-      try {
-        parsedBody = JSON.parse(body)
-      } catch (e) {
-        console.error('Invalid JSON body')
-        return new Response('Bad request', { status: 400, headers: corsHeaders })
-      }
-
-      // Extract user ID from Facebook's signed request
-      const userId = parsedBody.user_id || parsedBody.psid
       if (!userId) {
-        console.error('No user ID found in deletion request')
-        return new Response('Bad request', { status: 400, headers: corsHeaders })
+        console.error('No user ID provided')
+        return new Response('Bad request - user ID required', { status: 400, headers: corsHeaders })
       }
 
       console.log(`Processing deletion request for user ID: ${userId}`)
@@ -131,10 +95,7 @@ serve(async (req) => {
 
       try {
         // Delete user data from our database
-        // Note: In a real app, you'd need to map Facebook user_id to your internal user_id
-        
-        // For now, we'll log the deletion request and return success
-        // In production, implement the actual deletion logic here
+        // Add your actual deletion logic here based on your schema
         
         const confirmationCode = `deletion_${Date.now()}_${userId}`
         
