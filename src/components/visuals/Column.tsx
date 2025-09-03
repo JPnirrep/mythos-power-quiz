@@ -76,10 +76,10 @@ export function Column({
           
           {/* Label */}
           <div className="mt-2 text-center">
-            <p className="text-xs font-semibold text-temple-stone font-pepps-body">
+            <p className="text-xs font-semibold text-temple-stone">
               {archetypeName}
             </p>
-            <p className="text-xs text-muted-foreground font-pepps-body">
+            <p className="text-xs text-muted-foreground">
               {score}/{maxScore}
             </p>
           </div>

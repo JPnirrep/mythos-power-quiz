@@ -82,10 +82,10 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
           // Cas d'égalité - Afficher les deux archétypes dominants
           <div className="space-y-6">
             <div className="p-6 rounded-lg border-2 border-secondary bg-secondary/10">
-              <h3 className="font-bold text-2xl text-primary font-pepps-title mb-4">
+              <h3 className="font-bold text-2xl text-primary mb-4">
                 🎉 Archétypes Co-Dominants : Profil Hybride Exceptionnel !
               </h3>
-              <p className="font-pepps-body text-foreground mb-6 text-lg leading-relaxed">
+              <p className="text-foreground mb-6 text-lg leading-relaxed">
                 Félicitations ! Vous avez un profil rare avec deux archétypes dominants à égalité. 
                 Cette dualité est votre super-pouvoir : vous pouvez puiser dans les forces des deux archétypes selon les situations.
               </p>
@@ -93,17 +93,17 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
             
             {/* Premier archétype dominant */}
             <div className="p-6 rounded-lg border border-primary/30 bg-primary/5">
-              <h3 className="font-bold text-xl text-primary font-pepps-title mb-4">
+              <h3 className="font-bold text-xl text-primary mb-4">
                 {dominantContent.titleMain}
               </h3>
-              <p className="font-pepps-body text-foreground mb-4 leading-relaxed">
+              <p className="text-foreground mb-4 leading-relaxed">
                 {dominantContent.intro}
               </p>
               <div className="text-sm">
-                <h4 className="font-bold text-primary font-pepps-title mb-2">
+                <h4 className="font-bold text-primary mb-2">
                   Vos forces clés :
                 </h4>
-                <p className="font-pepps-body text-foreground leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   <strong>Déclic PEPPS :</strong> {interpretations[dominantKey].declic}
                 </p>
               </div>
@@ -112,17 +112,17 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
             {/* Deuxième archétype dominant */}
             {secondDominantContent && (
               <div className="p-6 rounded-lg border border-primary/30 bg-primary/5">
-                <h3 className="font-bold text-xl text-primary font-pepps-title mb-4">
+                <h3 className="font-bold text-xl text-primary mb-4">
                   {secondDominantContent.titleMain}
                 </h3>
-                <p className="font-pepps-body text-foreground mb-4 leading-relaxed">
+                <p className="text-foreground mb-4 leading-relaxed">
                   {secondDominantContent.intro}
                 </p>
                 <div className="text-sm">
-                  <h4 className="font-bold text-primary font-pepps-title mb-2">
+                  <h4 className="font-bold text-primary mb-2">
                     Vos forces clés :
                   </h4>
-                  <p className="font-pepps-body text-foreground leading-relaxed">
+                  <p className="text-foreground leading-relaxed">
                     <strong>Déclic PEPPS :</strong> {interpretations[secondDominantKey!].declic}
                   </p>
                 </div>
@@ -131,10 +131,10 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
             
             {/* Message spécial pour les profils hybrides */}
             <div className="p-4 rounded-lg bg-gradient-to-r from-secondary/20 to-primary/20 border border-primary/30">
-              <h4 className="font-bold text-lg text-primary font-pepps-title mb-3">
+              <h4 className="font-bold text-lg text-primary mb-3">
                 Votre Super-Pouvoir Hybride
               </h4>
-              <p className="font-pepps-body text-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 Cette égalité révèle une capacité d'adaptation remarquable. Vous pouvez naviguer entre 
                 {dominantContent.shortLabel} et {secondDominantContent?.shortLabel}, utilisant chaque facette 
                 selon les besoins de la situation. C'est une richesse rare !
@@ -144,27 +144,27 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
         ) : (
           // Cas normal - Un seul archétype dominant
           <div className="p-6 rounded-lg border-2 border-secondary bg-secondary/10">
-            <h3 className="font-bold text-2xl text-primary font-pepps-title mb-4">
+            <h3 className="font-bold text-2xl text-primary mb-4">
               {dominantContent.titleMain}
             </h3>
-            <p className="font-pepps-body text-foreground mb-6 text-lg leading-relaxed">
+            <p className="text-foreground mb-6 text-lg leading-relaxed">
               {dominantContent.intro}
             </p>
             
             {dominantContent.sections.map((section, index) => (
               <div key={index} className="mb-6">
-                <h4 className="font-bold text-lg text-primary font-pepps-title mb-3">
+                <h4 className="font-bold text-lg text-primary mb-3">
                   {section.title}
                 </h4>
                 {section.paragraphs && section.paragraphs.map((paragraph, pIndex) => (
-                  <p key={pIndex} className="font-pepps-body text-foreground mb-3 leading-relaxed">
+                  <p key={pIndex} className="text-foreground mb-3 leading-relaxed">
                     {paragraph}
                   </p>
                 ))}
                 {section.bullets && (
                   <ul className="space-y-2 ml-4">
                     {section.bullets.map((bullet, bIndex) => (
-                      <li key={bIndex} className="font-pepps-body text-foreground leading-relaxed list-disc">
+                      <li key={bIndex} className="text-foreground leading-relaxed list-disc">
                         {bullet}
                       </li>
                     ))}
@@ -175,10 +175,10 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
             
             {/* Déclic PEPPS - Keep original text */}
             <div className="mt-6">
-              <h4 className="font-bold text-lg text-primary font-pepps-title mb-3">
+              <h4 className="font-bold text-lg text-primary mb-3">
                 Ton Levier de Croissance (Le « Déclic PEPPS »)
               </h4>
-              <p className="font-pepps-body text-foreground leading-relaxed">
+              <p className="text-foreground leading-relaxed">
                 <strong>Votre Déclic PEPPS :</strong> {interpretations[sortedScores[0][0]].declic}
               </p>
             </div>
@@ -187,10 +187,10 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
 
         {/* Growth Area */}
         <div className="p-4 rounded-lg border border-border bg-muted/30">
-          <h3 className="font-bold text-xl text-primary font-pepps-title mb-3">
+          <h3 className="font-bold text-xl text-primary mb-3">
             Ton archétype à explorer : {resultsContent[lowestKey].shortLabel}
           </h3>
-          <p className="font-pepps-body text-foreground leading-relaxed">
+          <p className="text-foreground leading-relaxed">
             {lowestContent}
           </p>
         </div>
@@ -198,14 +198,14 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
 
       {/* Call to Action */}
       <div className="mt-10 p-6 rounded-lg bg-muted">
-        <h3 className="text-2xl font-bold mb-2 text-primary font-pepps-title">
+        <h3 className="text-2xl font-bold mb-2 text-primary">
           Cette exploration vous a parlé ?
         </h3>
-        <p className="mb-4 text-muted-foreground font-pepps-body">
+        <p className="mb-4 text-muted-foreground">
           Ce n'est que le début. Lors de notre webinaire exclusif, nous vous donnerons les outils 
           concrets pour maîtriser votre profil unique.
         </p>
-        <Button variant="pepps" size="lg" className="text-lg">
+        <Button variant="default" size="lg" className="text-lg">
           S'inscrire au webinaire du 7 octobre
         </Button>
       </div>

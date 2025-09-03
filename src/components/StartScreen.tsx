@@ -82,13 +82,13 @@ export function StartScreen({ onStart }: StartScreenProps) {
   return (
     <div className="screen-transition screen-visible min-h-screen flex items-center justify-center">
       <div className="quiz-card max-w-md w-full mx-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-foreground">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
           Le Grand Quiz Miroir des Mythes
         </h1>
         <p className="text-center text-lg mb-2 text-foreground font-medium">
           Découvrez vos Super-Pouvoirs de Sensibles
         </p>
-        <p className="text-center mb-8 text-muted-foreground font-pepps-body">
+        <p className="text-center mb-8 text-muted-foreground">
           Bienvenue ! Avant de commencer cette expérience ludique, merci de nous laisser vos coordonnées pour recevoir votre rapport personnalisé.
         </p>
       
@@ -100,7 +100,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
             value={userInfo.firstname}
             onChange={(e) => handleChange("firstname", e.target.value)}
             required
-            className="focus:ring-secondary focus:border-secondary"
           />
           <Input
             type="text"
@@ -108,7 +107,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
             value={userInfo.lastname}
             onChange={(e) => handleChange("lastname", e.target.value)}
             required
-            className="focus:ring-secondary focus:border-secondary"
           />
         </div>
         <Input
@@ -117,7 +115,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
           value={userInfo.email}
           onChange={(e) => handleChange("email", e.target.value)}
           required
-          className="focus:ring-secondary focus:border-secondary"
         />
         <Input
           type="tel"
@@ -125,7 +122,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
           value={userInfo.phone}
           onChange={(e) => handleChange("phone", e.target.value)}
           required
-          className="focus:ring-secondary focus:border-secondary"
         />
         <div className="flex items-center space-x-2 mb-4">
           <Checkbox 
@@ -141,7 +137,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
         </div>
         <Button 
           type="submit" 
-          variant="pepps" 
           size="lg" 
           className="w-full text-lg"
         >

@@ -17,14 +17,14 @@ export function PauseScreen({ currentQuestionIndex, onContinue }: PauseScreenPro
 
   return (
     <div className="screen-transition screen-visible text-center">
-      <h2 className="text-3xl font-bold mb-4 font-pepps-title text-primary">
+      <h2 className="text-3xl font-bold mb-4 text-primary">
         Petite pause ! 
       </h2>
-      <p className="text-lg mb-8 text-muted-foreground font-pepps-body">
+      <p className="text-lg mb-8 text-muted-foreground">
         {pauseText}
       </p>
       <Button 
-        variant="pepps" 
+        variant="default" 
         size="lg" 
         onClick={onContinue}
         className="text-lg px-10 py-4"

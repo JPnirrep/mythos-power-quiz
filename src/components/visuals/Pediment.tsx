@@ -21,7 +21,7 @@ export function Pediment({ title }: PedimentProps) {
       </div>
       
       {/* Title */}
-      <h1 className="text-2xl md:text-3xl font-bold text-center mt-4 font-pepps-title text-temple-gold">
+      <h1 className="text-2xl md:text-3xl font-bold text-center mt-4 text-temple-gold">
         {title}
       </h1>
     </div>

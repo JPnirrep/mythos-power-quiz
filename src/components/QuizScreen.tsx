@@ -27,10 +27,10 @@ export function QuizScreen({
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-primary font-pepps-title">
+          <span className="text-sm font-medium text-primary">
             Progression
           </span>
-          <span className="text-sm font-medium text-primary font-pepps-title">
+          <span className="text-sm font-medium text-primary">
             Question {currentQuestionIndex + 1} / {totalQuestions}
           </span>
         </div>
@@ -41,7 +41,7 @@ export function QuizScreen({
       </div>
 
       {/* Question */}
-      <h2 className="text-2xl font-semibold my-6 text-center min-h-[100px] font-pepps-title text-primary">
+      <h2 className="text-2xl font-semibold my-6 text-center min-h-[100px] text-primary">
         {currentQuestion.question}
       </h2>
 
@@ -64,7 +64,7 @@ export function QuizScreen({
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="text-sm font-pepps-body">{label.text}</div>
+            <div className="text-sm">{label.text}</div>
           </div>
         ))}
       </div>
@@ -72,14 +72,14 @@ export function QuizScreen({
       {/* Navigation */}
       <div className="flex justify-between">
         <Button
-          variant="pepps-blue"
+          variant="secondary"
           onClick={onPrevious}
           className={currentQuestionIndex === 0 ? "invisible" : ""}
         >
           Précédent
         </Button>
         <Button
-          variant="pepps"
+          variant="default"
           onClick={onNext}
           disabled={!isAnswered}
         >

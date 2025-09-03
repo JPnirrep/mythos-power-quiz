@@ -10,7 +10,7 @@ export function Base({ description }: BaseProps) {
       <div className="w-full h-2 bg-temple-stone/80 border-t border-temple-gold/30" />
       
       {/* Description */}
-      <p className="text-center text-muted-foreground font-pepps-body mt-4 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+      <p className="text-center text-muted-foreground mt-4 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
         {description}
       </p>
     </div>
