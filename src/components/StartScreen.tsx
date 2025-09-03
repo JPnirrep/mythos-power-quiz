@@ -80,15 +80,15 @@ export function StartScreen({ onStart }: StartScreenProps) {
   };
 
   return (
-    <div className="screen-transition screen-visible pepps-gradient-bg min-h-screen flex items-center justify-center">
+    <div className="screen-transition screen-visible min-h-screen flex items-center justify-center">
       <div className="quiz-card max-w-md w-full mx-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-white">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-foreground">
           Le Grand Quiz Miroir des Mythes
         </h1>
-        <p className="text-center text-lg mb-2 text-white font-medium">
+        <p className="text-center text-lg mb-2 text-foreground font-medium">
           Découvrez vos Super-Pouvoirs de Sensibles
         </p>
-        <p className="text-center mb-8 text-white/80 font-pepps-body">
+        <p className="text-center mb-8 text-muted-foreground font-pepps-body">
           Bienvenue ! Avant de commencer cette expérience ludique, merci de nous laisser vos coordonnées pour recevoir votre rapport personnalisé.
         </p>
       
