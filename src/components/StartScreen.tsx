@@ -80,16 +80,17 @@ export function StartScreen({ onStart }: StartScreenProps) {
   };
 
   return (
-    <div className="screen-transition screen-visible">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-primary">
-        Le Grand Quiz Miroir des Mythes
-      </h1>
-      <p className="text-center text-lg mb-2 text-accent font-medium">
-        Découvrez vos Super-Pouvoirs de Sensibles
-      </p>
-      <p className="text-center mb-8 text-muted-foreground font-pepps-body">
-        Bienvenue ! Avant de commencer cette expérience ludique, merci de nous laisser vos coordonnées pour recevoir votre rapport personnalisé.
-      </p>
+    <div className="screen-transition screen-visible pepps-gradient-bg min-h-screen flex items-center justify-center">
+      <div className="quiz-card max-w-md w-full mx-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 font-pepps-title text-white">
+          Le Grand Quiz Miroir des Mythes
+        </h1>
+        <p className="text-center text-lg mb-2 text-white font-medium">
+          Découvrez vos Super-Pouvoirs de Sensibles
+        </p>
+        <p className="text-center mb-8 text-white/80 font-pepps-body">
+          Bienvenue ! Avant de commencer cette expérience ludique, merci de nous laisser vos coordonnées pour recevoir votre rapport personnalisé.
+        </p>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -189,6 +190,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
             Continuer avec Google
           </Button>
         </div>
+      </div>
       </div>
     </div>
   );
