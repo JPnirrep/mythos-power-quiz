@@ -8,7 +8,6 @@ import { ResultsScreen } from "./ResultsScreen";
 import { quizData } from "@/data/quizData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import templeLogoUrl from "@/assets/pepps-logo-temple.png";
 
 interface UserInfo {
   firstname: string;
@@ -173,8 +172,8 @@ export function QuizContainer() {
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <header className="mb-8">
         <img 
-          src={templeLogoUrl}
-          alt="Logo La Fabrique PEPPS avec Temple" 
+          src="/lovable-uploads/b1c7d745-be3d-4df1-af29-0321e823148e.png"
+          alt="Logo La Fabrique PEPPS" 
           className="w-64 md:w-80"
         />
       </header>
