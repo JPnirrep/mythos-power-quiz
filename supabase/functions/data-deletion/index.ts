@@ -1,138 +1,65 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { corsHeaders } from '../_shared/cors.ts';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+// Attention : La création d'un client admin ne doit se faire que dans un contexte sécurisé côté serveur (Edge Functions, etc.)
+// Assurez-vous que vos variables d'environnement SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY sont bien configurées dans votre projet Supabase.
+const supabaseAdmin = createClient(
+  Deno.env.get('SUPABASE_URL') ?? '',
+  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+);
 
-serve(async (req) => {
-  // Handle CORS preflight requests
+Deno.serve(async (req) => {
+  // Gérer la requête pre-flight CORS
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
+    return new Response('ok', { headers: corsHeaders });
   }
 
   try {
-    if (req.method === 'GET') {
-      // Return HTML page with deletion instructions
-      const html = `
-        <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Instructions de Suppression des Données</title>
-          <style>
-            body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-            .container { max-width: 800px; margin: 0 auto; }
-            h1 { color: #333; }
-            h2 { color: #555; margin-top: 30px; }
-            ul, ol { margin: 10px 0; padding-left: 30px; }
-            .contact { background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <h1>Instructions de Suppression des Données</h1>
-            
-            <h2>Suppression de vos données personnelles</h2>
-            <p>Si vous souhaitez supprimer vos données personnelles de notre application, veuillez suivre les instructions ci-dessous :</p>
-            
-            <h2>Comment supprimer vos données</h2>
-            <ol>
-              <li>Envoyez un email à notre équipe support</li>
-              <li>Incluez votre adresse email utilisée pour l'inscription</li>
-              <li>Précisez votre demande de suppression complète des données</li>
-              <li>Nous traiterons votre demande sous 30 jours</li>
-            </ol>
-            
-            <h2>Données concernées</h2>
-            <p>La suppression comprendra :</p>
-            <ul>
-              <li>Vos informations de profil (nom, prénom, email, téléphone)</li>
-              <li>Vos réponses au quiz</li>
-              <li>Vos résultats et préférences</li>
-              <li>Toutes les données associées à votre compte</li>
-            </ul>
-            
-            <h2>Délai de traitement</h2>
-            <p>Votre demande sera traitée dans un délai maximum de 30 jours calendaires à compter de la réception de votre demande. Vous recevrez une confirmation par email une fois la suppression effectuée.</p>
-            
-            <div class="contact">
-              <h2>Contact</h2>
-              <p>Pour toute demande de suppression de données, contactez-nous à :</p>
-              <p><strong>[votre-email@example.com]</strong></p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `
-      
-      return new Response(html, {
-        headers: {
-          ...corsHeaders,
-          'Content-Type': 'text/html; charset=utf-8',
-        },
-      })
+    // 1. Obtenir le token d'authentification de l'utilisateur depuis les en-têtes.
+    const authHeader = req.headers.get('Authorization')!;
+    const jwt = authHeader.split('Bearer ')[1];
+
+    // 2. Récupérer les informations de l'utilisateur à partir du token.
+    const { data: { user }, error: userError } = await createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: `Bearer ${jwt}` } } },
+    ).auth.getUser();
+
+    if (userError) {
+      console.error("Erreur lors de la récupération de l'utilisateur:", userError);
+      return new Response(JSON.stringify({ error: userError.message }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 401,
+      });
     }
 
-    if (req.method === 'POST') {
-      // Handle user data deletion request
-      const body = await req.json()
-      const userId = body.user_id
-      
-      if (!userId) {
-        console.error('No user ID provided')
-        return new Response('Bad request - user ID required', { status: 400, headers: corsHeaders })
-      }
-
-      console.log(`Processing deletion request for user ID: ${userId}`)
-
-      // Initialize Supabase client with service role key for admin operations
-      const supabaseUrl = Deno.env.get('SUPABASE_URL')!
-      const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-      const supabase = createClient(supabaseUrl, supabaseServiceKey)
-
-      try {
-        // Delete user data from our database
-        // Add your actual deletion logic here based on your schema
-        
-        const confirmationCode = `deletion_${Date.now()}_${userId}`
-        
-        return new Response(
-          JSON.stringify({
-            url: `https://jrmmqjmmbelwpojntlmz.supabase.co/functions/v1/data-deletion`,
-            confirmation_code: confirmationCode
-          }),
-          {
-            headers: {
-              ...corsHeaders,
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-      } catch (error) {
-        console.error('Error deleting user data:', error)
-        return new Response('Internal server error', { status: 500, headers: corsHeaders })
-      }
+    if (!user) {
+      return new Response(JSON.stringify({ error: 'Utilisateur non trouvé' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 404,
+      });
     }
 
-    return new Response('Method not allowed', { 
-      status: 405,
-      headers: corsHeaders
-    })
+    // 3. Utiliser le client admin pour supprimer l'utilisateur.
+    // La suppression en cascade (ON DELETE CASCADE) dans la base de données
+    // se chargera de supprimer le profil et les réponses au quiz associés.
+    const { error: deleteError } = await supabaseAdmin.auth.admin.deleteUser(user.id);
 
+    if (deleteError) {
+      console.error("Erreur lors de la suppression de l'utilisateur:", deleteError);
+      throw deleteError;
+    }
+
+    // 4. Renvoyer une réponse de succès.
+    return new Response(JSON.stringify({ message: 'Utilisateur et données supprimés avec succès' }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 200,
+    });
   } catch (error) {
-    console.error('Error in data-deletion function:', error)
-    return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      {
-        status: 500,
-        headers: {
-          ...corsHeaders,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    return new Response(JSON.stringify({ error: error.message }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 500,
+    });
   }
-})
+});
