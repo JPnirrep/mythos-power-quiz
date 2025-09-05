@@ -162,7 +162,7 @@ export default {
 				'fade-in': 'fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
 				'fade-out': 'fade-out 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
 				'zoom-in': 'zoom-in 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-				'pulse-gentle': 'pulse-gentle 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+				'pulse-gentle': 'pulse-gentle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite',
 				'slide-up': 'slide-up 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
 			}
 		}

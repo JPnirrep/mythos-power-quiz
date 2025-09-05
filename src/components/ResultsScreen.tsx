@@ -196,18 +196,32 @@ export function ResultsScreen({ scores }: ResultsScreenProps) {
         </div>
       </div>
 
-      {/* Call to Action */}
-      <div className="mt-10 p-6 rounded-lg bg-muted">
-        <h3 className="text-2xl font-bold mb-2 text-primary">
-          Cette exploration vous a parlé ?
-        </h3>
-        <p className="mb-4 text-muted-foreground">
-          Ce n'est que le début. Lors de notre webinaire exclusif, nous vous donnerons les outils 
-          concrets pour maîtriser votre profil unique.
-        </p>
-        <Button variant="default" size="lg" className="text-lg">
-          S'inscrire au webinaire du 7 octobre
-        </Button>
+      {/* Call to Action - Style Premium */}
+      <div className="mt-12 p-8 rounded-2xl bg-gradient-to-br from-pepps-yellow/10 to-pepps-blue/10 border-2 border-pepps-yellow/30 shadow-2xl">
+        <div className="text-center space-y-6">
+          <div className="w-16 h-16 mx-auto bg-pepps-yellow rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-3xl">🎯</span>
+          </div>
+          <div>
+            <h3 className="text-3xl font-pepps-title font-bold mb-4 text-pepps-indigo">
+              Prêt(e) à transformer vos découvertes en action ?
+            </h3>
+            <p className="text-lg mb-2 text-pepps-gray leading-relaxed max-w-2xl mx-auto">
+              <strong>Webinaire Exclusif :</strong> "Comment utiliser votre profil HSP pour réussir"
+            </p>
+            <p className="text-pepps-gray mb-6 leading-relaxed max-w-2xl mx-auto">
+              Recevez votre rapport personnalisé complet + 3 stratégies concrètes adaptées à votre archétype dominant
+            </p>
+          </div>
+          <div className="space-y-3">
+            <Button variant="pepps" size="lg" className="text-xl px-12 py-4 font-pepps-title font-bold shadow-xl">
+              🚀 Je réserve ma place gratuite
+            </Button>
+            <p className="text-sm text-pepps-gray/80">
+              ✨ Places limitées • 📅 7 octobre 2024 • 🎁 Bonus exclusifs
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

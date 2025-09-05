@@ -58,11 +58,34 @@ export function TempleVisualization({ scores }: TempleVisualizationProps) {
   return (
     <TooltipProvider>
       <div className="w-full max-w-4xl mx-auto py-8 px-4">
-        {/* Pediment */}
-        <Pediment title="🎉 Vos Super-Pouvoirs de Sensibles ! 🎉" />
+        {/* Style BD Header avec personnage central */}
+        <div className="relative mb-8">
+          <div className="bg-gradient-to-r from-pepps-yellow via-pepps-blue to-pepps-yellow rounded-3xl p-6 shadow-2xl border-4 border-pepps-indigo">
+            <div className="text-center relative">
+              {/* Personnage central style BD */}
+              <div className="w-24 h-24 mx-auto mb-4 bg-pepps-cloud rounded-full flex items-center justify-center shadow-xl border-4 border-pepps-indigo animate-zoom-in">
+                <span className="text-4xl">🏛️</span>
+              </div>
+              <h2 className="text-3xl font-pepps-title font-bold text-pepps-indigo mb-2">
+                🎉 RÉVÉLATION DE VOS SUPER-POUVOIRS ! 🎉
+              </h2>
+              <p className="text-pepps-indigo font-pepps-body text-lg font-medium">
+                Comme nos héros mythologiques, découvrez vos forces cachées
+              </p>
+              {/* Bulles style BD */}
+              <div className="absolute -top-2 -left-2 w-6 h-6 bg-pepps-yellow rounded-full border-2 border-pepps-indigo"></div>
+              <div className="absolute -top-4 -right-4 w-4 h-4 bg-pepps-blue rounded-full border-2 border-pepps-indigo"></div>
+              <div className="absolute -bottom-2 left-1/4 w-5 h-5 bg-pepps-mint rounded-full border-2 border-pepps-indigo"></div>
+            </div>
+          </div>
+        </div>
         
-        {/* Temple columns */}
-        <div className="flex justify-center items-end gap-4 md:gap-8 my-8">
+        {/* Temple columns avec style BD */}
+        <div className="flex justify-center items-end gap-4 md:gap-8 my-8 relative">
+          {/* Bulles décoratives style BD */}
+          <div className="absolute -top-8 left-0 w-8 h-8 bg-pepps-yellow/30 rounded-full animate-pulse-gentle"></div>
+          <div className="absolute -top-12 right-0 w-6 h-6 bg-pepps-blue/30 rounded-full animate-pulse-gentle" style={{animationDelay: '1s'}}></div>
+          
           {scores.map((score) => {
             const columnProps = getColumnProps(score);
             return (
@@ -78,8 +101,10 @@ export function TempleVisualization({ scores }: TempleVisualizationProps) {
           })}
         </div>
         
-        {/* Base */}
-        <Base description="Voici la carte de vos talents. Vos scores les plus élevés sont vos super-pouvoirs dominants." />
+        {/* Base avec style BD */}
+        <div className="bg-pepps-cloud/80 backdrop-blur-sm rounded-2xl p-6 border-3 border-pepps-indigo shadow-xl">
+          <Base description="🗿 Voici la carte de vos talents légendaires ! Vos scores les plus élevés révèlent vos super-pouvoirs dominants, prêts à conquérir le monde ! ⚡" />
+        </div>
       </div>
     </TooltipProvider>
   );
