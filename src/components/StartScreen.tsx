@@ -84,13 +84,6 @@ export function StartScreen({ onStart }: StartScreenProps) {
       <div className="max-w-2xl w-full">
         {/* Hero Section with Pepps branding */}
         <div className="text-center mb-12 animate-zoom-in">
-          <div className="mb-6">
-            <div className="inline-block p-4 bg-pepps-yellow/10 rounded-2xl mb-4">
-              <div className="w-16 h-16 mx-auto bg-pepps-indigo rounded-full flex items-center justify-center">
-                <span className="text-2xl font-pepps-title font-bold text-white">P</span>
-              </div>
-            </div>
-          </div>
           <h1 className="text-5xl md:text-6xl font-pepps-title font-bold text-pepps-indigo mb-6 leading-tight">
             Le Grand Quiz<br />
             <span className="text-pepps-blue">Miroir des Mythes</span>
