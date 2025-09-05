@@ -167,4 +167,74 @@
   .btn-pepps {
     @apply bg-pepps-yellow text-pepps-indigo font-pepps-title font-semibold hover:bg-pepps-yellow/90 hover:scale-105 animate-pulse-gentle shadow-lg;
   }
+
+  /* PEPPS Pulse Animation */
+  .pepps-pulse {
+    animation: pepps-pulse 3s infinite;
+  }
+
+  /* Comic Book Card Style */
+  .pepps-bd-card {
+    @apply relative rounded-2xl p-8 overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--pepps-cloud)), hsl(var(--pepps-mint)));
+    border: 3px solid hsl(var(--pepps-indigo));
+  }
+
+  .pepps-bd-card::before {
+    content: '';
+    @apply absolute -top-2.5 -left-2.5 -right-2.5 -bottom-2.5 -z-10 rounded-3xl;
+    background: linear-gradient(45deg, hsl(var(--pepps-yellow)), hsl(var(--pepps-blue)), hsl(var(--pepps-indigo)), hsl(var(--pepps-yellow)));
+    background-size: 400% 400%;
+    animation: bd-border-glow 6s ease-in-out infinite;
+  }
+
+  /* Webinar Card Style */
+  .pepps-webinar-card {
+    @apply rounded-2xl transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--pepps-yellow)), hsl(var(--pepps-yellow) / 0.8));
+    border: 2px solid hsl(var(--pepps-indigo));
+    box-shadow: 0 8px 32px hsl(var(--pepps-indigo) / 0.2);
+  }
+
+  .pepps-webinar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px hsl(var(--pepps-indigo) / 0.3);
+  }
+
+  /* Webinar Button Style */
+  .pepps-webinar-button {
+    @apply font-semibold px-8 py-4 rounded-xl transition-all duration-300;
+    background: hsl(var(--pepps-yellow));
+    border: 2px solid hsl(var(--pepps-indigo));
+    color: hsl(var(--pepps-indigo));
+    animation: gentle-pulse 4s ease-in-out infinite;
+  }
+
+  .pepps-webinar-button:hover {
+    background: hsl(var(--pepps-indigo));
+    color: hsl(var(--pepps-yellow));
+    transform: scale(1.05);
+  }
+}
+
+/* PEPPS Keyframes */
+@keyframes pepps-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes bd-border-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--pepps-yellow) / 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px hsl(var(--pepps-yellow) / 0);
+  }
 }
