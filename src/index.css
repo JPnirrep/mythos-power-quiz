@@ -119,9 +119,25 @@
   body {
     @apply text-foreground;
     font-family: 'Lato', sans-serif;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
     background: linear-gradient(135deg, hsl(var(--pepps-indigo)), hsl(var(--pepps-blue)));
     background-attachment: fixed;
-    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Palette Pepps (bleu, jaune, turquoise, violet, rose pâle) */
+    background: 
+      linear-gradient(135deg, #3D2C7D, #28AAE1, #FFC425, #FAD6EC, #A8DADC),
+      linear-gradient(120deg, rgba(255,255,255,0.20) 30%, rgba(255,255,255,0) 80%);
+    background-blend-mode: lighten;
+    animation: pepps-light-hue 24s ease-in-out infinite alternate;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -247,5 +263,32 @@
   }
   50% {
     box-shadow: 0 0 0 10px hsl(var(--pepps-yellow) / 0);
+  }
+}
+
+@keyframes pepps-light-hue {
+  0% {
+    background-position: 0% 0%, 0% 0%;
+    filter: brightness(1) saturate(1) hue-rotate(0deg);
+  }
+  20% {
+    background-position: 20% 15%, 15% 20%;
+    filter: brightness(1.05) saturate(1.08) hue-rotate(30deg);
+  }
+  40% {
+    background-position: 70% 60%, 30% 50%;
+    filter: brightness(1.1) saturate(1.15) hue-rotate(75deg); /* passage vers rose pâle */
+  }
+  60% {
+    background-position: 100% 100%, 60% 100%;
+    filter: brightness(1.08) saturate(1.1) hue-rotate(110deg);
+  }
+  80% {
+    background-position: 75% 60%, 100% 60%;
+    filter: brightness(1.05) saturate(1.1) hue-rotate(205deg);
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%;
+    filter: brightness(1) saturate(1) hue-rotate(0deg);
   }
 }
