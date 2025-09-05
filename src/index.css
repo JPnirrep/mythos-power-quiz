@@ -139,19 +139,19 @@
   }
 
   .answer-option {
-    @apply cursor-pointer p-4 border-2 border-border rounded-lg text-center transition-all duration-200 hover:scale-105 hover:shadow-lg;
+    @apply cursor-pointer p-4 border-2 border-border rounded-lg text-center transition-all duration-300 hover:scale-105 hover:shadow-lg;
   }
 
   .answer-option.selected {
-    @apply border-secondary bg-secondary/10 scale-105 shadow-lg;
+    @apply border-pepps-yellow bg-pepps-yellow/10 scale-105 shadow-lg ring-2 ring-pepps-yellow/30;
   }
 
   .progress-bar-pepps {
-    @apply w-full bg-border rounded-full h-2.5;
+    @apply w-full bg-pepps-mint/20 rounded-full h-3;
   }
 
   .progress-bar-inner-pepps {
-    @apply h-2.5 rounded-full bg-accent transition-all duration-300 ease-in-out;
+    @apply h-3 rounded-full bg-gradient-to-r from-pepps-indigo to-pepps-blue transition-all duration-700 ease-in-out;
   }
 
   .screen-transition {
@@ -164,5 +164,10 @@
 
   .screen-visible {
     @apply opacity-100 scale-100;
+  }
+
+  /* Button pulse animation for Pepps variant */
+  .btn-pepps {
+    @apply bg-pepps-yellow text-pepps-indigo font-pepps-title font-semibold hover:bg-pepps-yellow/90 hover:scale-105 animate-pulse-gentle shadow-lg;
   }
 }
