@@ -168,9 +168,11 @@
     @apply bg-pepps-yellow text-pepps-indigo font-pepps-title font-semibold hover:bg-pepps-yellow/90 hover:scale-105 animate-pulse-gentle shadow-lg;
   }
 
-  /* PEPPS Pulse Animation */
+  /* PEPPS Pulse Animation - Force 3s timing */
   .pepps-pulse {
-    animation: pepps-pulse 3s infinite;
+    animation: pepps-pulse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+    animation-duration: 3s !important;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   /* Comic Book Card Style */
@@ -217,11 +219,20 @@
   }
 }
 
-/* PEPPS Keyframes */
+/* PEPPS Keyframes - Exact 3s timing with gentle pulse */
 @keyframes pepps-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 hsl(var(--pepps-yellow) / 0.4);
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 0 8px hsl(var(--pepps-yellow) / 0);
+  }
+  100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 hsl(var(--pepps-yellow) / 0.4);
+  }
 }
 
 @keyframes bd-border-glow {

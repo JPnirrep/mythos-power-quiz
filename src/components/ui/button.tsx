@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-105",
         ghost: "hover:bg-accent hover:text-accent-foreground hover:scale-105",
         link: "text-primary underline-offset-4 hover:underline",
-        pepps: "bg-pepps-yellow text-pepps-indigo font-pepps-title font-semibold hover:bg-pepps-yellow/90 hover:scale-105 animate-pulse-gentle shadow-lg",
+        pepps: "bg-pepps-yellow text-pepps-indigo font-pepps-title font-semibold hover:bg-pepps-yellow/90 hover:scale-105 pepps-pulse shadow-lg",
       },
       size: {
         default: "h-10 px-4 py-2",
